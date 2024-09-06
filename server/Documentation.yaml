@@ -1,0 +1,52 @@
+✅ Database: MongoDB
+
+DB Models: 
+  - userDb: It is used to store user details
+    Fields:
+      1. Username: Stores the username of the user
+      2. User email: Stores the user's email address
+      3. Password: Stores the user's password
+      4. Creation Time: Stores the time when the user was created
+
+  - videoDb: This model is used to store details of video uploads.
+    Fields:
+      1. Username: Stores the username of the uploader
+      2. User email: Stores the email address of the uploader
+      3. Video URL: Stores the URL of the uploaded video
+      4. Upload Date: Stores the date when the video was uploaded
+      5. Metadata: Stores additional information about the video
+          - Duration: Stores the duration of the video in seconds
+          - Format: Stores the format of the video
+      6. Status: Stores the status of the video processing or any custom status
+      7. Is Deep Fake: Indicates whether the video is detected as deep fake
+      8. Created At: Stores the creation time of the record
+      9. Updated At: Stores the last update time of the record
+
+  - paymentDb: This model is used to store payment details.
+    Fields:
+      1. User ID: Stores the unique identifier of the user
+      2. Amount: Stores the payment amount
+      3. Currency: Stores the currency type of the payment
+      4. Payment Date: Stores the date when the payment was made
+      5. Subscription: Stores the type of subscription associated with the payment
+      6. Payment Status: Stores the status of the payment (e.g., completed, pending, failed)
+
+
+
+
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
