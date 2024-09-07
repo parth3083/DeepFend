@@ -1,35 +1,70 @@
-✅ Database: MongoDB
+Database: MongoDB
 
-DB Models: 
-  - userDb: It is used to store user details
-    Fields:
-      1. Username: Stores the username of the user
-      2. User email: Stores the user's email address
-      3. Password: Stores the user's password
-      4. Creation Time: Stores the time when the user was created
+DB Models:
+  - userDb:
+      Purpose: Stores user details.
+      Fields:
+        1. Username: Stores the username of the user.
+        2. User email: Stores the user's email address.
+        3. Password: Stores the user's password.
+        4. Creation Time: Stores the time when the user was created.
 
-  - videoDb: This model is used to store details of video uploads.
-    Fields:
-      1. Username: Stores the username of the uploader
-      2. User email: Stores the email address of the uploader
-      3. Video URL: Stores the URL of the uploaded video
-      4. Upload Date: Stores the date when the video was uploaded
-      5. Metadata: Stores additional information about the video
-          - Duration: Stores the duration of the video in seconds
-          - Format: Stores the format of the video
-      6. Status: Stores the status of the video processing or any custom status
-      7. Is Deep Fake: Indicates whether the video is detected as deep fake
-      8. Created At: Stores the creation time of the record
-      9. Updated At: Stores the last update time of the record
+  - videoDb:
+      Purpose: Stores details of video uploads.
+      Fields:
+        1. Username: Stores the username of the uploader.
+        2. User email: Stores the email address of the uploader.
+        3. Video URL: Stores the URL of the uploaded video.
+        4. Upload Date: Stores the date when the video was uploaded.
+        5. Metadata: Stores additional information about the video.
+           - Duration: Stores the duration of the video in seconds.
+           - Format: Stores the format of the video.
+        6. Status: Stores the status of the video processing or any custom status.
+        7. Is Deep Fake: Indicates whether the video is detected as deep fake.
+        8. Created At: Stores the creation time of the record.
+        9. Updated At: Stores the last update time of the record.
 
-  - paymentDb: This model is used to store payment details.
-    Fields:
-      1. User ID: Stores the unique identifier of the user
-      2. Amount: Stores the payment amount
-      3. Currency: Stores the currency type of the payment
-      4. Payment Date: Stores the date when the payment was made
-      5. Subscription: Stores the type of subscription associated with the payment
-      6. Payment Status: Stores the status of the payment (e.g., completed, pending, failed)
+  - paymentDb:
+      Purpose: Stores payment details.
+      Fields:
+        1. User ID: Stores the unique identifier of the user.
+        2. Amount: Stores the payment amount.
+        3. Currency: Stores the currency type of the payment.
+        4. Payment Date: Stores the date when the payment was made.
+        5. Subscription: Stores the type of subscription associated with the payment.
+        6. Payment Status: Stores the status of the payment (e.g., completed, pending, failed).
+
+Folders:
+  - routes:
+      - videoProcessor:
+          Purpose: Handles video file processing, calculates video duration, and cleans up files.
+          Location: routes/videoProcessing.ts
+          Details:
+            - File Handling: Reads the `assets` folder to find video files with `.mp4`, `.avi`, or `.mkv` extensions.
+            - Python Script Execution: Uses `spawn` to run a Python script (`videoDurationFinder.py`) to calculate video duration.
+            - Error Handling: Logs errors and sends appropriate responses if issues occur.
+            - File Cleanup: Deletes the video file from the `assets` folder after processing.
+            - Response: Returns the video duration and extension in the response.
+
+      - userRegistration:
+          Purpose: Manages user registration including validation, password hashing, and storing user details.
+          Location: routes/userRegistration.ts
+          Details:
+            - Validation: Validates user input using `zod`.
+            - Password Hashing: Hashes passwords using `bcryptjs` before storage.
+            - User Creation: Saves user details to the `userDb` MongoDB collection.
+            - Error Handling: Catches and responds to errors during user registration.
+            - Response: Sends a success message on successful registration or an error message on failure.
+
+  - utils:
+      - videoDurationFinder:
+          Purpose: Calculates the duration of a video file in minutes and seconds.
+          Location: utils/videoDurationFinder.py
+          Details:
+            - Duration Calculation: Reads video file path from command-line arguments, calculates duration in minutes and seconds.
+            - Error Handling: Catches and logs errors related to file processing.
+            - Output: Prints the video duration in a format like "X minutes and Y seconds."
+
 
 
 
