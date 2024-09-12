@@ -6,7 +6,26 @@ navbar:
     - text: Get Started
       action: /get-started
 
-
+landingPage:
+  title: DeepDetect
+  description: "DeepDetect is a web application designed to detect deep fake videos using advanced AI/ML techniques. Explore how to use the application below."
+  sections:
+    - title: About DeepDetect
+      content: "DeepDetect leverages cutting-edge technology to accurately detect deep fake videos, offering a reliable and efficient solution for video authentication."
+    - title: How to Use
+      steps:
+        - step: 1
+          title: "Sign In or Get Started"
+          description: "Create an account or sign in to begin using DeepDetect."
+        - step: 2
+          title: "Upload Video"
+          description: "Easily upload videos for analysis using our secure platform."
+        - step: 3
+          title: "Get Results"
+          description: "Receive detailed results on whether your video is authentic or a deep fake."
+  smoothScrolling: 
+    library: "Lenis"
+    description: "Implemented smooth scrolling for a seamless user experience using the Lenis library."
 
 
 
