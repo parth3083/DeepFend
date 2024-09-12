@@ -1,0 +1,18 @@
+navbar:
+  name: DeepDetect
+  buttons:
+    - text: Sign In
+      action: /signin
+    - text: Get Started
+      action: /get-started
+
+
+
+
+
+
+
+
+
+
+
