@@ -1,6 +1,25 @@
-@import url('https://fonts.googleapis.com/css2?family=Aladin&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Aladin&display=swap");
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
+html.lenis,
+html.lenis body {
+  height: auto;
+}
 
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+.lenis.lenis-smooth iframe {
+  pointer-events: none;
+}
