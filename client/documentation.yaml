@@ -27,7 +27,27 @@ landingPage:
     library: "Lenis"
     description: "Implemented smooth scrolling for a seamless user experience using the Lenis library."
 
-
+userDashboard:
+  navbar:
+    projectName: DeepDetect
+    userInfo:
+      userName: "{{ user.name }}"
+      userPicture: "{{ user.pictureUrl }}"
+    buttons:
+      - text: "Upload Video"
+        action: "/upload"
+  cards:
+    description: "Displays videos uploaded by the user, processing details, and deep fake detection results."
+    videoCard:
+      fields:
+        - title: "Video Title"
+          description: "{{ video.title }}"
+        - title: "Processing Length"
+          description: "{{ video.processingLength }} minutes"
+        - title: "Number of Frames Processed"
+          description: "{{ video.framesProcessed }}"
+        - title: "Deep Fake Detection Result"
+          description: "{{ video.result }}"
 
 
 
