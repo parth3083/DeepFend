@@ -24,9 +24,9 @@ function HeroSection() {
         <Button children={"Get Started"} className="mt-8" />
       </div>
 
-      {/* <Image_Container /> */}
+      <Image_Container />
 
-      {/* <div className="flex flex-col items-center">
+      <div className="flex flex-col items-center">
         <Heading_and_Sunheading
           beforeBrHeading={" detect fake in moments"}
           beforeBrdesc={
@@ -44,8 +44,8 @@ function HeroSection() {
             />
           ))}
         </div>
-      </div> */}
-      {/* <Image_Container className={"mb-10"} /> */}
+      </div>
+      <Image_Container className={"mb-10"} />
     </main>
   );
 }

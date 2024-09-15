@@ -18,12 +18,12 @@ function Heading_and_Sunheading({
   return (
     <>
       <h1
-        className={`font-ala text-4xl md:text-6xl lg:text-7xl capitalize text-center ${className}`}
+        className={`font-ala text-4xl font-bold md:text-6xl lg:text-7xl capitalize text-center ${className}`}
       >
         {beforeBrHeading} <br />
         <span className="text-[#2664EF]">{spanHeading}</span> {afterBrheading}
       </h1>
-      <p className="font-ala text-sm md:text-lg lg:text-xl text-center mt-2 opacity-60">
+      <p className="font-ala text-sm md:text-lg lg:text-xl text-center font-medium mt-2 opacity-60">
         {beforeBrdesc} <br /> {afterBrdesc}
       </p>
     </>

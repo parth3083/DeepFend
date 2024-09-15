@@ -9,7 +9,7 @@ function Navbar() {
       </div>
       <div className="right flex items-center gap-3 lg:gap-5 justify-between">
               <div className="circle w-9 h-9 rounded-full bg-red-500"></div>
-              <h1 className="text-xl md:text-2xl lg:text-3xl capitalize">Parth</h1>
+        <h1 className="text-xl md:text-2xl lg:text-3xl capitalize">Parth</h1>
               
       </div>
     </nav>
