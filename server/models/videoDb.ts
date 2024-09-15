@@ -1,36 +1,17 @@
 import mongoose, { Schema, Document, Model } from "mongoose";
-import { z } from "zod";
-
-const videoSchema = z.object({
-  userId: z.string(),
-  videoUrl: z.string().url({ message: "Enter a valid URL" }),
-  uploadDate: z.date(),
-  metadata: z.object({
-    duration: z
-      .number()
-      .positive({ message: "Duration must be a positive number" }),
-    format: z
-      .string()
-      .min(3, { message: "Format must be at least 3 characters long" }),
-  }),
-  status: z.string(),
-  isDeepFake: z.boolean(),
-  createdAt: z.date(),
-  updatedAt: z.date(),
-});
 
 interface videoDetails extends Document {
   userId: string;
   videoUrl: string;
-  uploadDate: Date;
   metadata: {
     duration: number;
     format: string;
   };
-  status: string;
+  confidence: number;
   isDeepFake: boolean;
+  frames: number;
   createdAt: Date;
-  updatedAt: Date;
+  outputImage: string;
 }
 
 const videoDetailsSchema: Schema<videoDetails> = new mongoose.Schema({
@@ -42,11 +23,7 @@ const videoDetailsSchema: Schema<videoDetails> = new mongoose.Schema({
     type: String,
     required: true,
   },
-  uploadDate: {
-    type: Date,
-    default: Date.now,
-    required: true,
-  },
+
   metadata: {
     duration: {
       type: Number,
@@ -57,8 +34,13 @@ const videoDetailsSchema: Schema<videoDetails> = new mongoose.Schema({
       required: true,
     },
   },
-  status: {
-    type: String,
+  confidence: {
+    type: Number,
+    required: true,
+  },
+  frames: {
+    type: Number,
+    required: true,
   },
   isDeepFake: {
     type: Boolean,
@@ -70,8 +52,9 @@ const videoDetailsSchema: Schema<videoDetails> = new mongoose.Schema({
     default: Date.now,
     required: true,
   },
-  updatedAt: {
-    type: Date,
+  outputImage: {
+    type: String,
+    required: true,
   },
 });
 
@@ -80,4 +63,4 @@ const videoModel: Model<videoDetails> = mongoose.model<videoDetails>(
   videoDetailsSchema
 );
 
-export default { videoModel, videoSchema };
+export default videoModel;
