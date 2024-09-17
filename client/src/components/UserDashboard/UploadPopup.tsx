@@ -108,7 +108,7 @@ function UploadPopup({ uploadPopup, setUploadPopup }: UploadPopupProps) {
       }`}
     >
       {!showTrimPopup && !showSliderPopup ? (
-        <div className="container relative w-[33vw] flex items-center justify-center p-8 h-[20vw] bg-slate-200">
+        <div className="container  relative w-[90%] h-[60%] lg:w-[33vw] flex items-center justify-center p-8 lg:h-[20vw] bg-slate-200">
           <IoClose
             className="absolute top-2 right-2 text-2xl cursor-pointer text-black"
             onClick={() => setUploadPopup(false)}
@@ -136,12 +136,13 @@ function UploadPopup({ uploadPopup, setUploadPopup }: UploadPopupProps) {
           </div>
         </div>
       ) : showTrimPopup ? (
-        <div className="container relative w-[33vw] p-8 bg-white shadow-lg rounded-md">
+        <div className="container relative w-[33vw] p-8  bg-white shadow-lg rounded-md">
           <IoClose
             className="absolute top-2 right-2 text-2xl cursor-pointer text-black"
             onClick={() => setShowTrimPopup(false)}
-          />
-          <h1 className="font-ala text-4xl text-center mb-4">
+            />
+            <p className="font-ala text-sm opacity-60 text-center">Oops! your video is too long</p>
+          <h1 className="font-ala text-4xl text-center font-semibold mb-4">
             Trim your video
           </h1>
           <form onSubmit={handleSubmit(handleTrimSubmit)}>

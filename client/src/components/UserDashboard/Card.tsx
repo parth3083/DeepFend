@@ -2,7 +2,7 @@ import React from "react";
 
 function Card() {
   return (
-    <div className="video-card w-full h-[70vh] md:h-[50vh] lg:h-56 bg-slate-200 p-3 flex-shrink-0  lg:px-14  rounded-md lg:flex-row flex-col flex items-center justify-between">
+    <div className="video-card w-full h-[70vh] md:h-[50vh] lg:h-56 bg-slate-200  p-3 flex-shrink-0  lg:px-14  rounded-md lg:flex-row flex-col flex items-center justify-between">
       <div className="left w-full md:w-full md:h-[65%] h-1/2 lg:w-[25%] lg:h-full  flex flex-col gap-1 items-center">
         <div className="top w-full h-[80%] bg-amber-600"></div>
         <div className="bottom">

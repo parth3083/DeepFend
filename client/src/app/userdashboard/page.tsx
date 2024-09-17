@@ -10,7 +10,7 @@ function page() {
     redirect("/");
   }
   return (
-    <div className="w-full overflow-x-hidden min-h-screen ">
+    <div className="w-full overflow-x-hidden min-h-screen pt-10 ">
     <HeroSection/>
     </div>
   )
