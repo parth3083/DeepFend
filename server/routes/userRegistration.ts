@@ -15,18 +15,28 @@ const userRegister = async (req: Request, res: Response) => {
 
     const { username, email, clerk_Id } = parsedBody;
 
+    const existingUser = await UserModel.findOne({ userEmail: email });
+    if (existingUser) {
+      return res.status(201).json({ error: "User logged in" });
+    }
+    else {
+      
     const newUser = new UserModel({
       username: username,
       userEmail: email,
       clerk_Id: clerk_Id,
       createdAt: new Date(),
     });
-
-    const response = await newUser.save();
-
-    console.log(response);
-
+      const response = await newUser.save();
+      
+      console.log(response);
+      
     res.status(200).json({ message: "User registered successfully" });
+    }
+
+
+
+
   } catch (error) {
     if (error instanceof z.ZodError) {
    

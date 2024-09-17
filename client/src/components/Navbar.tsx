@@ -29,6 +29,12 @@ function Navbar() {
   
         });
       }
+      if (response.status === 201) {
+        toast({
+          description: "User logged in successfully",
+  
+        });
+      }
     } catch (error) {
       console.log(error);
       toast({
