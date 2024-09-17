@@ -1,8 +1,12 @@
+"use client"
 import React, { useCallback, useState } from "react";
 import { IoClose } from "react-icons/io5";
 import { useDropzone } from "react-dropzone";
 import { useForm } from "react-hook-form";
 import { Slider } from "@/components/ui/slider";
+import axios from "axios"
+import { useUser } from "@clerk/nextjs";
+import { useToast } from "@/hooks/use-toast";
 
 interface UploadPopupProps {
   uploadPopup: boolean;
@@ -17,6 +21,8 @@ interface TrimData {
 }
 
 function UploadPopup({ uploadPopup, setUploadPopup }: UploadPopupProps) {
+  const { toast } = useToast();
+  const { user, isSignedIn } = useUser();
   const [showTrimPopup, setShowTrimPopup] = useState<boolean>(false);
   const [showSliderPopup, setShowSliderPopup] = useState<boolean>(false);
   const [videoDuration, setVideoDuration] = useState<number>(0);
@@ -54,45 +60,47 @@ function UploadPopup({ uploadPopup, setUploadPopup }: UploadPopupProps) {
   });
 
   const handleTrimSubmit = (data: TrimData) => {
-    setTrimData(data); // Store the trim data
-    setShowTrimPopup(false); // Hide the trim popup
-    setShowSliderPopup(true); // Show the frame selection popup
+    setTrimData(data);
+    setShowTrimPopup(false);
+    setShowSliderPopup(true);
   };
 
-  const handleSliderSubmit = () => {
-    if (videoFile && trimData) {
-      // Prepare form data
+  const handleSliderSubmit = async () => {
+    if (isSignedIn && videoFile) {
+      const email = user.emailAddresses[0]?.emailAddress || "";
+
       const formData = new FormData();
       formData.append("video", videoFile);
-      formData.append("startMinute", trimData.startMinute.toString());
-      formData.append("startSecond", trimData.startSecond.toString());
-      formData.append("endMinute", trimData.endMinute.toString());
-      formData.append("endSecond", trimData.endSecond.toString());
+      formData.append("startMinute", (trimData?.startMinute ?? 0).toString());
+      formData.append("startSecond", (trimData?.startSecond ?? 0).toString());
+      formData.append("endMinute", (trimData?.endMinute ?? 0).toString());
+      formData.append("endSecond", (trimData?.endSecond ?? 0).toString());
       formData.append("framesPerMinute", framesPerMinute.toString());
+      formData.append("email", email);
 
-      // Submit to the backend
-      fetch("/api/submit", {
-        method: "POST",
-        body: formData,
-      })
-        .then((response) => response.json())
-        .then((data) => {
-          console.log("Success:", data);
-          setUploadPopup(false); // Close popup after successful submission
+      try {
+        const response = await axios.post("http://localhost:8000/deepfake/process-video", formData);
+        console.log("Success:", response.data);
+        setShowSliderPopup(false);
+        setUploadPopup(false);
+        toast({
+          description:"Video uploaded successfully"
         })
-        .catch((error) => {
-          console.error("Error:", error);
-        });
+        
+      } catch (error) {
+        console.error("Error:", error);
+      }
     } else {
-      console.log("Missing video or trim data");
+      toast({
+        description:"Missing video file or user not signed in"
+      })
+      console.log("Missing video file or user not signed in");
     }
-    setShowSliderPopup(false);
   };
 
   const handleSliderChange = (e: number[]) => {
     setFramesPerMinute(e[0]);
   };
-
   return (
     <section
       className={`w-full z-50 h-screen fixed top-0 left-0 right-0 bottom-0 inset-0 flex items-center justify-center bg-white bg-opacity-50 ${
