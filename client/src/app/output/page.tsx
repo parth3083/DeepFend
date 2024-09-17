@@ -1,7 +1,14 @@
 import Navbar from '@/components/UserDashboard/Navbar'
+import { auth } from '@clerk/nextjs/server';
+import { redirect } from 'next/navigation';
 import React from 'react'
 
 function page() {
+  const { userId } = auth();
+  const isAuth = !!userId;
+  if (!isAuth) {
+    redirect("/");
+  }
   return (
       <main className='w-full h-screen'>
           <Navbar />

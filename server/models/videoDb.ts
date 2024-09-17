@@ -23,7 +23,6 @@ const videoDetailsSchema: Schema<videoDetails> = new mongoose.Schema({
     type: String,
     required: true,
   },
-
   metadata: {
     duration: {
       type: Number,

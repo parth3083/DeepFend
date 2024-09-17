@@ -1,7 +1,4 @@
 import mongoose, { Schema, Document, Model } from "mongoose";
-import { z } from "zod";
-
-
 
 interface UserDetails extends Document {
   username: string;
@@ -15,7 +12,7 @@ const userSchema: Schema<UserDetails> = new mongoose.Schema({
   username: { type: String, required: true, unique: true },
   userEmail: { type: String, required: true, unique: true },
   password: { type: String, required: true },
-  subscription: { type: String, required: true, default:"free" },
+  subscription: { type: String, required: true, default: "free" },
   createdAt: { type: Date, default: Date.now },
 });
 

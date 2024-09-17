@@ -1,11 +1,16 @@
 import HeroSection from '@/components/UserDashboard/HeroSection'
-import Navbar from '@/components/UserDashboard/Navbar'
+import { redirect } from 'next/navigation';
+import { auth } from '@clerk/nextjs/server'
 import React from 'react'
 
 function page() {
+  const { userId } = auth();
+  const isAuth = !!userId;
+  if (!isAuth) {
+    redirect("/");
+  }
   return (
     <div className="w-full overflow-x-hidden min-h-screen ">
-      <Navbar />
     <HeroSection/>
     </div>
   )
