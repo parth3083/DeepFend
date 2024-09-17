@@ -1,16 +1,23 @@
 import express, { Request, Response } from "express";
 const app = express();
-app.use(express.json());
+
 import connectDb from "./config/dbConnection";
-import userRegistration from "./routes/userRegister";
-import videoProcessor from "./routes/videoProcessing";
+import userRegister from "./routes/userRegistration"
+import cors from "cors"
 
-
+app.use(express.json());
+app.use(cors({
+  origin: "http://localhost:3000"
+}))
 
 connectDb();
 
-app.get("/", videoProcessor);
+app.get("/", (req:Request, res:Response) => {
+  res.send("DeepFend backend started working!!!!!")
+});
 
-app.listen(3000, () => {
-  console.log("http://localhost:3000");
+app.post("/user-register",userRegister)
+
+app.listen(8000, () => {
+  console.log("http://localhost:8000");
 });

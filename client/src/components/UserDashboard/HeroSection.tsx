@@ -11,7 +11,7 @@ function HeroSection() {
     <main className="w-full h-[91vh] mt-3  px-5 lg:px-24">
       
       <div className="w-full h-10 lg:h-20   flex items-center justify-between">
-        <h1 className="font-ala text-2xl lg:text-5xl capitalize ">my videos</h1>
+        <h1 className="font-ala text-2xl lg:text-5xl capitalize font-bold">my videos</h1>
         <Button
           uploadPopup={uploadPopup} setUploadPopup={ setUploadPopup}
           children={"Upload"}
