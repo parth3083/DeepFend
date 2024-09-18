@@ -6,6 +6,7 @@ import axios from "axios";
 import { useToast } from "@/hooks/use-toast";
 
 
+
 interface User {
   username: string;
   emailAddresses: { emailAddress: string }[];
@@ -69,6 +70,12 @@ function Navbar() {
         {isLoaded ? (
           isSignedIn ? (
             <>
+                  <Link
+                href={"/about"}
+                className="px-2 py-1 rounded-md capitalize text-ala font-normal text-white text-lg cursor-pointer bg-[#2664EF]"
+              >
+                about us
+              </Link>
               <Link
                 href={"/userdashboard"}
                 className="px-2 py-1 rounded-md text-ala font-normal text-white text-lg cursor-pointer bg-[#2664EF]"
@@ -79,9 +86,17 @@ function Navbar() {
                 <UserButton />
                 {user?.username}
               </div>
+
+   
             </>
           ) : (
-            <>
+              <>
+                    <Link
+                href={"/about"}
+                className="px-2 py-1 rounded-md capitalize text-ala font-normal text-white text-lg cursor-pointer bg-[#2664EF]"
+              >
+                about us
+              </Link>
               <Link
                 href={"/sign-in"}
                 className="px-2 py-1 rounded-md text-ala font-normal text-white text-lg cursor-pointer bg-[#2664EF]"
@@ -94,6 +109,8 @@ function Navbar() {
               >
                 Sign Up
               </Link>
+          
+        
             </>
           )
         ) : (
