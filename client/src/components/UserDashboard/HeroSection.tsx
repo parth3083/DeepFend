@@ -6,6 +6,7 @@ import UploadPopup from "./UploadPopup";
 
 function HeroSection() {
   const [uploadPopup, setUploadPopup] = useState(false);
+  const [isReal, setIsReal] = useState(false);
   console.log(uploadPopup); 
   return (
     <main className="w-full h-[91vh] mt-3  px-5 lg:px-24">
@@ -23,7 +24,7 @@ function HeroSection() {
           setUploadPopup={setUploadPopup}
         />
       )}
-      <CardContainer />
+      <CardContainer isReal={isReal} setIsReal={ setIsReal} />
     </main>
   );
 }
