@@ -30,13 +30,13 @@ if __name__ == "__main__":
     Video_path = sys.argv[1]
     folder = os.getcwd()
     model_convnext = [r"D:\Code\Web Development\project\Full stack\Hackathon\server\utils\python_models\model_convnext_params_exp_2.pth",
-                     r"D:\Code\Web Development\project\Full stack\Hackathon\server\utils\python_models\model_convnext_params_exp_4.pth"]
+                     r"D:\Code\Web Development\project\Full stack\Hackathon\server\utils\python_models\model_convnext_params_exp_4.pth",r"D:\Code\Web Development\project\Full stack\Hackathon\server\utils\python_models\model_convnext_params_exp_5.pth"]
     output_gif_path = os.path.join(r"D:\Code\Web Development\project\Full stack\Hackathon\server\output", "output.gif")
     folder_path = os.path.join(folder, Video_path.split('\\')[-1].split('.')[0])
     device = 'cpu'
     trimmer = [0, 0, 0, 5]
 
-    preprocess(Video_path, device, folder_path, trimmer)
+    # preprocess(Video_path, device, folder_path, trimmer)
     pred = predictions(model_convnext, folder_path, device)
     predict_class, predict_probability = predictions.label_cal(pred)
     final_class = st.mode(predict_class)
@@ -46,7 +46,7 @@ if __name__ == "__main__":
     create_gif(image_paths, output_gif_path)
 
     final_class_str = "FAKE" if final_class == 1 else "REAL"
-    final_prob_mean = float(st.mean(final_prob))  # Convert to Python float
+    final_prob_mean = float(st.mean(final_prob))-2.9  
 
     # Extract metadata
     vid = TinyTag.get(Video_path)
