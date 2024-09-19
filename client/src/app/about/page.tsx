@@ -15,7 +15,7 @@ function page() {
 
 
         <Link href={'/about-us'} className="font-ala text-3xl border-2 cursor-pointer hover:bg-[#2664EF] hover:text-white transition-all ease-in-out duration-300 rounded-md text-[#2664EF] border-[#2664EF] px-3 py-2 ">
-        Who created deepFend ? 
+        Who created DeepFend ? 
         </Link>
       </div>
     </div>

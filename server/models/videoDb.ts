@@ -2,14 +2,20 @@ import mongoose, { Schema, Document, Model } from "mongoose";
 
 interface videoDetails extends Document {
   userId: string;
+
   videoUrl: string;
   metadata: {
     duration: number;
     format: string;
+    title: string;
+    size: string;
+    source: string;
+    bitrate: string;
   };
-  confidence: number;
-  isDeepFake: boolean;
-  frames: number;
+
+  finalClass: string;
+  finalProbability: string;
+
   createdAt: Date;
   outputImage: string;
 }
@@ -19,6 +25,7 @@ const videoDetailsSchema: Schema<videoDetails> = new mongoose.Schema({
     type: String,
     required: true,
   },
+
   videoUrl: {
     type: String,
     required: true,
@@ -32,20 +39,34 @@ const videoDetailsSchema: Schema<videoDetails> = new mongoose.Schema({
       type: String,
       required: true,
     },
+    title: {
+      type: String,
+      required: true,
+    },
+    size: {
+      type: String,
+      required: true,
+    },
+    source: {
+      type: String,
+      required: true,
+    },
+    bitrate: {
+      type: String,
+      required: true,
+    },
   },
-  confidence: {
-    type: Number,
+
+
+  finalClass: {
+    type: String,
     required: true,
   },
-  frames: {
-    type: Number,
+  finalProbability: {
+    type: String,
     required: true,
   },
-  isDeepFake: {
-    type: Boolean,
-    default: false,
-    required: true,
-  },
+
   createdAt: {
     type: Date,
     default: Date.now,

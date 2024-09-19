@@ -7,6 +7,7 @@ import { Slider } from "@/components/ui/slider";
 import axios from "axios"
 import { useUser } from "@clerk/nextjs";
 import { useToast } from "@/hooks/use-toast";
+import { redirect } from "next/navigation";
 
 interface UploadPopupProps {
   uploadPopup: boolean;
@@ -77,15 +78,17 @@ function UploadPopup({ uploadPopup, setUploadPopup }: UploadPopupProps) {
       formData.append("endSecond", (trimData?.endSecond ?? 0).toString());
       formData.append("framesPerMinute", framesPerMinute.toString());
       formData.append("email", email);
+      setShowSliderPopup(false);
+      setUploadPopup(false);
+      toast({
+        description:"Video uploaded successfully"
+      })
+      
 
       try {
         const response = await axios.post("http://localhost:8000/deepfake/process-video", formData);
         console.log("Success:", response.data);
-        setShowSliderPopup(false);
-        setUploadPopup(false);
-        toast({
-          description:"Video uploaded successfully"
-        })
+        
         
       } catch (error) {
         console.error("Error:", error);

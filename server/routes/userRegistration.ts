@@ -29,7 +29,7 @@ const userRegister = async (req: Request, res: Response) => {
     });
       const response = await newUser.save();
       
-      console.log(response);
+   
       
     res.status(200).json({ message: "User registered successfully" });
     }

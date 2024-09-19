@@ -5,6 +5,7 @@ import connectDb from "./config/dbConnection";
 import userRegister from "./routes/userRegistration"
 import cors from "cors"
 import {videoDetect} from "./routes/videoProcessing"
+import fetchdata from "./routes/fetchData";
 
 app.use(express.json());
 app.use(cors({
@@ -19,6 +20,7 @@ app.get("/", (req:Request, res:Response) => {
 
 app.post("/user-register", userRegister)
 app.use("/deepfake", videoDetect);
+app.get("/fetchingDetails",fetchdata)
 
 app.listen(8000, () => {
   console.log("http://localhost:8000");

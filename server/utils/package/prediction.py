@@ -22,11 +22,13 @@ class predictions():
         full_test_dataset = ImageFolder(folder_path, transform=transform)
         test_dataloader = DataLoader(full_test_dataset, batch_size=int(32/2), shuffle=False)
         criterion = nn.CrossEntropyLoss()
+        j = 0
         for model_name in model_convnext:
             model_conv=ConvNeXt()
             state_dict = torch.load(model_name,map_location=torch.device('cpu'))
             model_conv.load_state_dict(state_dict)
             model_conv = model_conv.to(device)
+            
             with torch.no_grad():
                 for images, labels in test_dataloader:
                     images, labels = images.to(device), labels.to(device)
@@ -43,7 +45,9 @@ class predictions():
                     
                     self.pred_false_prob.append(false_prob)
                     self.pred_real_prob.append(real_prob)
-    
+                    j += 1
+                    print(f"Model {j} : ", 'FAKE' if(sum(false_prob) > sum(real_prob)) else "REAL")
+                    print("\t Prob : ", max(false_prob) if(sum(false_prob) > sum(real_prob)) else max(real_prob))
     
     def label_cal(self):
         real_prob = self.pred_real_prob

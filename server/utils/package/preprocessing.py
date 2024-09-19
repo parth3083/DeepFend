@@ -7,14 +7,14 @@ from PIL import Image
 
 class preprocess():
     
-    def __init__(self,Video_path,device,out_path):
+    def __init__(self,Video_path,device,out_path,trimmer):
 
         video = Video_path
 
         mtcnn = MTCNN(device)
         facenet = FaceNet(device)
 
-        frames = self.get_frames(video)
+        frames = self.get_frames(video,trimmer)
         result = mtcnn.detect(frames)
 
         faces = []
@@ -39,7 +39,6 @@ class preprocess():
         name = out_path
         os.mkdir(name)
 
-        print("saving clustered faces.")
         for i in range(len(labels)):
             label = labels[i]
             if label < 0:
@@ -51,13 +50,26 @@ class preprocess():
             face.save('%s\\%d.bmp'%(id_dir, i))
     
     
-    def get_frames(self, video):
+    def get_frames(self, video, trimmer):
         frames = []
         vid = cv2.VideoCapture(video)
-        total = int(vid.get(cv2.CAP_PROP_FRAME_COUNT))
-        nframe = total//30
-        idx = np.linspace(0, total, nframe, endpoint=False, dtype=int)
-        for i in range(total):
+
+        # Retrieve video information
+        total_frames = int(vid.get(cv2.CAP_PROP_FRAME_COUNT))
+        fps = int(vid.get(cv2.CAP_PROP_FPS))
+
+        # Calculate start and end frames based on trimmer
+        start_frame = int((trimmer[0] * 60 +trimmer[1])*fps)
+        end_frame = int((trimmer[2] * 60 +trimmer[3])*fps)
+
+        # Ensure start and end frames are within the valid range
+        start_frame = max(0, start_frame)
+        end_frame = min(total_frames, end_frame)
+        x = (end_frame - start_frame)//fps
+        print(x)
+        idx = np.linspace(start_frame, end_frame, x, endpoint=False, dtype=int)
+        # Extract frames within the specified range
+        for i in range(start_frame, end_frame):
             ok = vid.grab()
             if i not in idx:
                 continue
@@ -68,7 +80,6 @@ class preprocess():
             frames.append(frm)
         vid.release()
         return frames
-
 
     def get_boundingbox(self, box, w, h, scale=1.2):
         x1, y1, x2, y2 = box

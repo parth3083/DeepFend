@@ -45,7 +45,7 @@ function HeroSection() {
           ))}
         </div>
       </div>
-      <Image_Container className={"mb-10"} />
+     
     </main>
   );
 }
