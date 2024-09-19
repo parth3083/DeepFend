@@ -2,7 +2,7 @@ import React from "react";
 
 function Description() {
   return (
-    <div className="short_Description w-full  text-center mt-7">
+    <div className="short_Description w-full  text-center mt-7 mb-10">
       <p className="font-ala text-xl font-medum tracking-wide ">
         <span className="font-bold">DeepFend</span> uses advanced AI and machine
         learning to identify manipulated videos with precision. By analyzing

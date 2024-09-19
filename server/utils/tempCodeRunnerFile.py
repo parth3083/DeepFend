@@ -1,0 +1,1 @@
+  image_paths = glob.glob(f"{os.path.join(folder_path,"id_0//*.bmp")}")

@@ -74,7 +74,7 @@ function Navbar() {
                 href={"/about"}
                 className="px-2 py-1 rounded-md capitalize text-ala font-normal text-white text-lg cursor-pointer bg-[#2664EF]"
               >
-                about us
+                about 
               </Link>
               <Link
                 href={"/userdashboard"}
@@ -95,7 +95,7 @@ function Navbar() {
                 href={"/about"}
                 className="px-2 py-1 rounded-md capitalize text-ala font-normal text-white text-lg cursor-pointer bg-[#2664EF]"
               >
-                about us
+                about 
               </Link>
               <Link
                 href={"/sign-in"}
